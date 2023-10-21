@@ -108,7 +108,7 @@ const SignUp  = ()=>{
             <div>
              <input
             type="text"
-            placeholder="branch"
+            placeholder="gender"
             value={branch}
             onChange={(e)=>setBranch(e.target.value)}
             style={{border:"2px solid grey",width:"88%",marginLeft:"20px"}}

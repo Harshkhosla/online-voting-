@@ -66,9 +66,10 @@ router.put('/vote',requireLogin,(req,res)=>{
    
     const {postId,userId} = req.body
     
+    
     Post.findByIdAndUpdate(postId,{
         $push:{votes:userId}
-        
+
     },{
         new:true
     }).exec((err,result)=>{
@@ -77,7 +78,7 @@ router.put('/vote',requireLogin,(req,res)=>{
         }else{
             transporter.sendMail({
                 to: "harshkhosla9945@gmail.com",
-                from: "mahenmondal111@gmail.com",
+                from: "harshkhosla9945@gmail.com",
                 subject: "E-voting ", 
                 html: `
                 <h3>,You has given your vote successfully to ${result.title}  </h3>

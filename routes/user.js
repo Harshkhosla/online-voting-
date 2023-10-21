@@ -35,8 +35,10 @@ router.post('/signup',(req,res)=>{
                 password:hashedpassword,
                 firstname,lastname,stateName,
                 pic
+
             }) 
             
+
     
             user.save()
             .then(user=>{
