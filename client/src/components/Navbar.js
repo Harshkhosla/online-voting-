@@ -38,7 +38,7 @@ const NavBar = ()=>{
     //    }
     //  }
     return(
-        <nav className='navbar navbar-dark bg-success'>
+        <nav className='navbar navbar-dark bg-primary'>
         <div className="nav-wrapper blue" style={{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
            
            <div >

@@ -9,14 +9,22 @@ const jwt = require('jsonwebtoken')
 const {JWT_SECRET} = require('../keys')
 const requireLogin = require('../middleware/requireLogin')
 
-const transporter = nodemailer.createTransport(
-    sendGridTransport({
-      auth: {
-        api_key: "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",
-      },
-    })
-  );
+// const transporter = nodemailer.createTransport(
+//     sendGridTransport({
+//       auth: {
+//         api_key: "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",
+//       },
+//     })
+//   );
   
+
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: "harshkhosla9945@gmail.com",
+      pass: "smaf dpfl osdw tips",
+    },
+  });
 router.post('/signup',(req,res)=>{
    const {firstname,lastname,stateName,email,password,pic,mobile,city,branch} = req.body 
 //   console.log(req.body )
@@ -42,13 +50,22 @@ router.post('/signup',(req,res)=>{
     
             user.save()
             .then(user=>{
-                transporter.sendMail({
-                    from: "harshkhosla9945@gmail.com", // sender address
-                    to: user.email, // list of receivers
-                    subject: "E-voting Registration", // Subject line
-                    html:
-                      " You sucessfully complete Your  registration for E-voting.", // html body
-                  });
+              transporter.sendMail({
+                from: "harshkhosla9945@gmail.com",
+                to: user.email,
+                subject: "E-voting Registration",
+                html: "You successfully completed your registration for E-voting.",
+              }, (error, info) => {
+                if (error) {
+                  console.error("Email sending error:", error);
+                  res.status(500).json({ error: "Email sending failed" });
+                } else {
+                  console.log("Email sent:", info.response);
+                  res.json({ message: "Email sent successfully" });
+                }
+              });
+              
+              
                 res.json({message:"saved successfully"})
             })
             .catch(err=>{
