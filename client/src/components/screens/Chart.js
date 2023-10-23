@@ -23,8 +23,10 @@ const Chart = () => {
     )
 
     useEffect(()=>{
-        fetch('http://localhost:5000/allpost',{
+        fetch('https://voting-backend-production.up.railway.app/allpost',{
             headers:{
+              'Origin': 'http://localhost:3000/signin',
+
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
         }).then(res=>res.json())

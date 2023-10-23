@@ -9,7 +9,7 @@ const Home  = ()=>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
-       fetch('http://localhost:5000/allpost',{
+       fetch('https://voting-backend-production.up.railway.app/allpost',{
            headers:{
                "Authorization":"Bearer "+localStorage.getItem("jwt")
            }
@@ -30,10 +30,11 @@ const Home  = ()=>{
           })
           .then((willDelete) => {
             if (willDelete) {
-                fetch('http://localhost:5000/vote',{
+                fetch('https://voting-backend-production.up.railway.app/vote',{
                     method:"put",
                     headers:{
                         "Content-Type":"application/json",
+                        'Origin': 'http://localhost:3000',
                         "Authorization":"Bearer "+localStorage.getItem("jwt")
                     },
                     body:JSON.stringify({
@@ -106,7 +107,7 @@ const Home  = ()=>{
                        <h6><b style={{}}>{item.title.split(" ")[0]}</b></h6>
                        
                                 <img src={item.photo} style={{height:"200px",width:"200px"}} 
-                                style={{width:"60px",height:"60px"}}
+                                // style={{width:"60px",height:"60px"}}
                                 />
                        
                             <div className="card-content">
